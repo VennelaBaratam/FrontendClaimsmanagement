@@ -30,21 +30,28 @@ function ClaimList() {
   const handleUpdate = (id) => {
     const updatedStatus = prompt("Enter new status:");
     if (updatedStatus) {
-      api.put(`/claims/${id}`, { status: updatedStatus })
+      console.log('Updating claim with ID:', id); // Log the claim ID
+      api.put(`/api/claims/${id}`, { status: updatedStatus }) // Adjust the base path as needed
         .then(response => {
-          setClaims(claims.map(claim => claim.id === id ? response.data : claim));
+          console.log("Response:", response); // Log the response
+          setClaims(claims.map(claim => 
+            claim.id === id ? response.data : claim
+          ));
+          alert("Claim updated successfully");
         })
-        .catch(error => console.error("Error updating claim:", error));
+        .catch(error => {
+          console.error("Error updating claim:", error);
+          alert("There was an error updating the claim. Please check the console for more details.");
+        });
+    } else {
+      console.log("No status entered");
     }
   };
+  
+  
+  
 
-  const handleGetDetails = (id) => {
-    api.get(`/claims/${id}`)
-      .then(response => {
-        setSelectedClaim(response.data);
-      })
-      .catch(error => console.error("Error fetching claim details:", error));
-  };
+ 
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
@@ -58,7 +65,7 @@ function ClaimList() {
             Policy ID: {claim.policyId}, Amount: {claim.amount}, Status: {claim.status}
             <button onClick={() => handleUpdate(claim.id)}>Update</button>
             <button onClick={() => handleDelete(claim.id)}>Delete</button>
-            <button onClick={() => handleGetDetails(claim.id)}>Get Details</button>
+            
           </li>
         ))}
       </ul>

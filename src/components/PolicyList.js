@@ -38,13 +38,7 @@ function PolicyList() {
     }
   };
 
-  const handleGetDetails = (id) => {
-    api.get(`/policies/${id}`)
-      .then(response => {
-        setSelectedPolicy(response.data);
-      })
-      .catch(error => console.error("Error fetching policy details:", error));
-  };
+  
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
@@ -58,7 +52,7 @@ function PolicyList() {
             Policyholder ID: {policy.policyholderId}, Coverage Amount: {policy.coverageAmount}
             <button onClick={() => handleUpdate(policy.id)}>Update</button>
             <button onClick={() => handleDelete(policy.id)}>Delete</button>
-            <button onClick={() => handleGetDetails(policy.id)}>Get Details</button>
+           
           </li>
         ))}
       </ul>

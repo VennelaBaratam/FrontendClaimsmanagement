@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = "http://localhost:3000";  // ✅ Backend URL
+const API_BASE_URL = "https://claims-application.vercel.app/";  // ✅ Backend URL
 const API_KEY = process.env.REACT_APP_API_KEY; // ✅ Load API key from .env
 
 // Ensure API key exists
